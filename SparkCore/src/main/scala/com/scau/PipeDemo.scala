@@ -10,11 +10,10 @@ import org.apache.spark.{SparkConf, SparkContext}
  */
 object PipeDemo {
   def main(args: Array[String]): Unit = {
-    val conf = new SparkConf().setMaster("local[2]").setAppName("pipe")
+    val conf = new SparkConf().setAppName("pipe")
     val sc = new SparkContext(conf)
     val rdd1 = sc.parallelize(1 to 10, 2)
-    val rdd2 = rdd1.pipe("echo hihi ")
-    rdd2.collect.foreach(println)
+    rdd1.pipe("./pipe.sh").collect
     sc.stop()
   }
 }

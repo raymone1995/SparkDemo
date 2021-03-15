@@ -1,0 +1,37 @@
+# Eclipse Project files
+.classpath
+.project
+.settings/
+.settings
+target/
+
+### STS ###
+.apt_generated
+.factorypath
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out
+
+### VS Code ###
+.vscode/
+
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# Git file
+*/.git/*
+.git
+
+# SVN file
+.svn
+_svn
+/demo/output/

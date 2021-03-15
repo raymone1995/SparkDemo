@@ -1,5 +1,7 @@
 package com.scau.kv
 
+import org.apache.spark.{SparkConf, SparkContext}
+
 /**
  * description: 使用给定的 combine 函数和一个初始化的zero value, 对每个key的value进行聚合.
  * 这个函数返回的类型U不同于源 RDD 中的V类型. U的类型是由初始化的zero value来定的. 所以, 我们需要两个操作:
@@ -15,6 +17,11 @@ package com.scau.kv
  */
 object AggregateByKeyDemo {
   def main(args: Array[String]): Unit = {
-
+    val conf = new SparkConf().setMaster("local[*]").setAppName("aggregateByKey")
+    val sc = new SparkContext(conf)
+    val rdd1 = sc.parallelize(List(("a", 3), ("b", 5), ("c", 1), ("a", 8), ("a", 11), ("b", 2)), 2)
+    val rdd2 = rdd1.aggregateByKey(Int.MinValue)(math.max(_, _), _ + _)
+    rdd2.collect().foreach(println)
+    sc.stop()
   }
 }
