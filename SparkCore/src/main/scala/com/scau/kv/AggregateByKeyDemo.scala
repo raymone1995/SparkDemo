@@ -19,9 +19,9 @@ object AggregateByKeyDemo {
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setMaster("local[*]").setAppName("aggregateByKey")
     val sc = new SparkContext(conf)
-    val rdd1 = sc.parallelize(List(("a", 3), ("b", 5), ("c", 1), ("a", 8), ("a", 11), ("b", 2)), 2)
+    val rdd1 = sc.parallelize(Array(("a", 1), ("b", 3), ("a", 4), ("b", 2), ("b", 8)), 2)
     val rdd2 = rdd1.aggregateByKey(Int.MinValue)(math.max(_, _), _ + _)
-    rdd2.collect().foreach(println)
+    rdd2.collect.foreach(println)
     sc.stop()
   }
 }
