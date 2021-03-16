@@ -16,7 +16,7 @@ object Example01 {
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setMaster("local[*]").setAppName("example01")
     val sc = new SparkContext(conf)
-    val lines = sc.textFile("D:\\SparkDemo\\SparkCore\\src\\main\\resources")
+    val lines = sc.textFile("/Users/mohongyuan/SparkDemo/SparkCore/src/main/resources/agent.log")
     val rdd1 = lines.map(line => {
       val arr = line.split("\\W")
       ((arr(1), arr(4)), 1)
@@ -27,7 +27,7 @@ object Example01 {
     val rdd5 = rdd4.mapValues(t => {
       t.toList.sortBy(_._2)(Ordering.Int.reverse).take(3)
     })
-    rdd5.collect.foreach(println)
+    rdd5.sortByKey(true).collect.foreach(println)
     sc.stop()
   }
 }
