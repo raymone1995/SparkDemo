@@ -8,7 +8,7 @@ import org.apache.spark.{SparkConf, SparkContext}
  */
 object TakeDemo {
   def main(args: Array[String]): Unit = {
-    val conf = new SparkConf().setMaster("local[*]").setAppName("take")
+    val conf = new SparkConf().setMaster("local[2]").setAppName("take")
     val sc = new SparkContext(conf)
     val rdd1 = sc.parallelize(Array(("mhy", 24), ("logn", 43), ("beich", 48), ("doinb", 19)))
     val rdd2 = rdd1.sortBy(_._2, true).take(3)
